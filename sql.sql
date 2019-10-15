@@ -43,6 +43,17 @@ FROM  longest_r_films
 ORDER by title;
 
 
+*** Alternative with subquery ***
+
+SELECT * 
+FROM (SELECT *
+	FROM film
+	WHERE rating='R'
+	ORDER BY length DESC
+	LIMIT 10) as longest_10
+ORDER BY title;
+
+
 --Which are the 10 kids films with the longest description?
 -- G, PG, PG-13
 --hint: google "SQL count length of string"
@@ -61,3 +72,8 @@ LIMIT 10;
 
 WITH years AS (SELECT DISTINCT release_year FROM film)
 SELECT COUNT(*) from years;
+
+*** Better alternative ***
+
+SELECT COUNT (DISTINCT release_year)
+FROM film;
